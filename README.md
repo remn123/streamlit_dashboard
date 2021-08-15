@@ -4,7 +4,7 @@ A simple dashboard sketch.
 
 ## Installation
 
-Open a terminal and clone the repository:
+Open a terminal and clone the repository ([How-To-Install-Git](https://www.stanleyulili.com/git/how-to-install-git-bash-on-windows/)):
 
 ```bash
 git clone https://github.com/remn123/st_dashboard.git
