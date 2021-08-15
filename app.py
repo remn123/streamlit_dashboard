@@ -125,99 +125,99 @@ def to_style(data):
     return s.set_properties(**{'text-align': 'center'})
 
 
+# Execute the App
+def run():
+    source = get_data()
+    # Save output in log.out
+    logger.info(f"Total Cliente: {source.value.max()}") # example
 
-source = get_data()
-# Save output in log.out
-logger.info(f"Total Cliente: {source.value.max()}") # example
-
-# Create Barplot
-barplot = BarPlot().compute(source)
+    # Create Barplot
+    barplot = BarPlot().compute(source)
 
 
 
-st.title('Clientes')
+    st.title('Clientes')
 
-with st.container():
-    #  -----------------------------------------------------------------------
-    # |         Cadastros - Novos         |     Clientes Ativos - Acumulado   |
-    #  -----------------------------------------------------------------------
-    # | Ontem | Hoje | Agosto | Conversão | Julho | Ontem | Agosto | Var. mês |
-    #  -----------------------------------------------------------------------
-    # |   25  |  30  |   200  |    75%    |  120  |  150  |   150  |   +25%   |
-    #  -----------------------------------------------------------------------
-    
-    titles = [
-        'Cadastros - Novos',
-        'Clientes Ativos - Acumulado',
-        #'Clientes Ativos - Acumulado 2'
-    ]
-    
-    # First Row
-    get_centered_values(values=titles, padding=1) # padding := {0, 1, 2, ...}
-    
-    # Second Row
-    columns = st.columns(8)
-    values = [ 
-        "Ontem", "Hoje", "Agosto",
-        "Conversão", "Julho" ,"Ontem",
-        "Agosto", "Var. mês"
-    ]
-    for col, value in zip(columns, values):
-        col.info(value)
-
-    # Third Row
-    columns = st.columns(8)
-    values = [ 
-        "25", "30", "200",
-        "75%", "120","-25%",
-        "0", "+25%"
-    ]
-    for col, value in zip(columns, values):
-        if value.startswith("+"): # any condition
-            col.success(value)    # Green
-        elif value.startswith("-"): # any condition
-            col.error(value)      # Red
-        elif value == '0': # any condition
-            col.warning(value)    # Yellow
-        else:
+    with st.container():
+        #  -----------------------------------------------------------------------
+        # |         Cadastros - Novos         |     Clientes Ativos - Acumulado   |
+        #  -----------------------------------------------------------------------
+        # | Ontem | Hoje | Agosto | Conversão | Julho | Ontem | Agosto | Var. mês |
+        #  -----------------------------------------------------------------------
+        # |   25  |  30  |   200  |    75%    |  120  |  150  |   150  |   +25%   |
+        #  -----------------------------------------------------------------------
+        
+        titles = [
+            'Cadastros - Novos',
+            'Clientes Ativos - Acumulado',
+            #'Clientes Ativos - Acumulado 2'
+        ]
+        
+        # First Row
+        get_centered_values(values=titles, padding=1) # padding := {0, 1, 2, ...}
+        
+        # Second Row
+        columns = st.columns(8)
+        values = [ 
+            "Ontem", "Hoje", "Agosto",
+            "Conversão", "Julho" ,"Ontem",
+            "Agosto", "Var. mês"
+        ]
+        for col, value in zip(columns, values):
             col.info(value)
-        # Alternatively:
-        # st.markdown(Cell(body=l, type="text"), unsafe_allow_html=True)
-    
-    # Forth Row
-    
-    # See more details in: https://pandas.pydata.org/pandas-docs/stable/user_guide/style.html
-    values = [
-        ('Ontem', to_style(get_data_from_time('Ontem'))),
-        ('Semana', to_style(get_data_from_time('Semana'))),
-        ('Mês', to_style(get_data_from_time('Mês'))),
-    ]
-    columns = st.columns(len(values))
-    for col, value in zip(columns, values):
-        col.markdown("<div><style>h3 {text-align: center;}</style><h3>"+value[0]+"</h3></div>", unsafe_allow_html=True)
-        col.table(value[1])
 
-    # Fifth Row
-    columns = st.columns(1)
-    col = columns[0]
-    col.write(barplot, use_container_width=True)
+        # Third Row
+        columns = st.columns(8)
+        values = [ 
+            "25", "30", "200",
+            "75%", "120","-25%",
+            "0", "+25%"
+        ]
+        for col, value in zip(columns, values):
+            if value.startswith("+"): # any condition
+                col.success(value)    # Green
+            elif value.startswith("-"): # any condition
+                col.error(value)      # Red
+            elif value == '0': # any condition
+                col.warning(value)    # Yellow
+            else:
+                col.info(value)
+            # Alternatively:
+            # st.markdown(Cell(body=l, type="text"), unsafe_allow_html=True)
+        
+        # Forth Row
+        
+        # See more details in: https://pandas.pydata.org/pandas-docs/stable/user_guide/style.html
+        values = [
+            ('Ontem', to_style(get_data_from_time('Ontem'))),
+            ('Semana', to_style(get_data_from_time('Semana'))),
+            ('Mês', to_style(get_data_from_time('Mês'))),
+        ]
+        columns = st.columns(len(values))
+        for col, value in zip(columns, values):
+            col.markdown("<div><style>h3 {text-align: center;}</style><h3>"+value[0]+"</h3></div>", unsafe_allow_html=True)
+            col.table(value[1])
+
+        # Fifth Row
+        columns = st.columns(1)
+        col = columns[0]
+        col.write(barplot, use_container_width=True)
 
 
-st.title('Transações')
-with st.container():
-    row1 = st.columns(1)
-    row1[0].info("Top 5 - Tokens Negociados")
+    st.title('Transações')
+    with st.container():
+        row1 = st.columns(1)
+        row1[0].info("Top 5 - Tokens Negociados")
 
-    row2 = st.columns(2)
+        row2 = st.columns(2)
 
-    valores1= [
-        "Ontem", "Semana", "Mês"
-    ]
-    valores2= [
-        "Ontem", "Hoje", "Julho", "Agosto"
-    ]
-    
-    
-    
-    
-    
+        valores1= [
+            "Ontem", "Semana", "Mês"
+        ]
+        valores2= [
+            "Ontem", "Hoje", "Julho", "Agosto"
+        ]
+        
+        
+if __name__ == "__main__":
+    run()
