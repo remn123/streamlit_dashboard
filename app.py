@@ -4,9 +4,9 @@ import numpy as np
 import logging
 import time 
 
-#from pannel.app.bar import BarPlot
-from pannel.app import BarPlot
-from pannel.core import local_css
+#from panel.app.bar import BarPlot
+from panel.app import BarPlot
+from panel.core import local_css
 from logging.handlers import RotatingFileHandler
 
 

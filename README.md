@@ -2,9 +2,9 @@
 
 A simple dashboard sketch.
 
-## Main Pannel
+## Main Panel
 
-![](docs/main.png?raw=true "Main Pannel")
+![](docs/main.png?raw=true "Main Panel")
 
 ## BarPlot
 
